@@ -1,2 +1,9 @@
-# dramatiq-requests-api
-Requests on API with Dramatiq, get unix_time from API and updates the data in PostgreSQL.
+# Requests on API with dramatiq and aiopg.
+On API we get actual unix_time and put this data in PostgreSQL.
+
+If you get "Internal server error". Please, try to update the page again or create the Issue and write your problem there.
+
+### Run with Docker:
+```
+docker-compose up -d --build
+```
