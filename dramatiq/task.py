@@ -18,7 +18,7 @@ def check_unix_time():
     response = json.loads(get(API_URL).text)
     unix_time = response["unixtime"]
 
-    async def mem():
+    async def insert_or_update_data():
         connection_async = await aiopg.connect(database="drama", user="drama_user", password="pass", host="db")
         cur = await connection_async.cursor()
         await cur.execute("SELECT * FROM responses;")
@@ -34,11 +34,7 @@ def check_unix_time():
         await cur.execute("COMMIT;")
         await connection_async.close()
 
-    async def lol():
-        task = asyncio.create_task(mem())
-        await task
-
-    asyncio.run(lol())
+    asyncio.run(insert_or_update_data())
 
 
 if __name__ == '__main__':
@@ -55,12 +51,7 @@ if __name__ == '__main__':
         await connection.close()
 
 
-    async def mem():
-        task = asyncio.create_task(create_table())
-        await task
-
-
-    asyncio.run(mem())
+    asyncio.run(create_table())
 
     scheduler = BlockingScheduler()
     scheduler.add_job(check_unix_time.send, 'interval', seconds=2)
